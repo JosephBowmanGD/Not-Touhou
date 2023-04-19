@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class CollectionController : MonoBehaviour
 {
-    [SerializeField]
-    bool isRed;
-    [SerializeField]
-    bool isBlue;
+    [Header("Collectable Variables")]
+    [SerializeField] private bool isRed;
+    [SerializeField] private bool isBlue;
+    public float fallSpeed;
 
     private Shoot shoot;
     private Rigidbody2D rb;
-    public float fallSpeed;
-    bool inBounds;
 
     void Start()
     {
@@ -23,7 +18,7 @@ public class CollectionController : MonoBehaviour
 
     private void FixedUpdate()
     {
-            rb.velocity = new Vector2(0, -fallSpeed);
+        rb.velocity = new Vector2(0, -fallSpeed);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -48,11 +43,13 @@ public class CollectionController : MonoBehaviour
                 }
             }
         }
+
         if (collision.CompareTag("Bound"))
         {
                 fallSpeed = Random.Range(0.5f, 2f);
         }
-        if (collision.CompareTag("Walll"))
+
+        if (collision.CompareTag("Wall"))
         {
             fallSpeed = 0f;
         }

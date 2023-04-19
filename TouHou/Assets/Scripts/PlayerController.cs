@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,13 +8,12 @@ public class PlayerController : MonoBehaviour
     private float InputVertical;
 
     [Header("Speed Variables")]
+    [SerializeField] private float MoveSpeed = 6;
+    [SerializeField] private float speedLimit = 0.7f;
+    [SerializeField] private float slowDownSpeed = 3;
+   
     private float currSpeed;
-    [SerializeField]
-    private float MoveSpeed = 6;
-    [SerializeField]
-    private float speedLimit = 0.7f;
-    [SerializeField]
-    float slowDownSpeed = 3;
+    private bool isSlowed;
 
     [Header("Animation")]
     public Animator anim;
@@ -36,12 +32,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            currSpeed = slowDownSpeed;
+            isSlowed = true;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            currSpeed = MoveSpeed;
+            isSlowed = false;
         }
+
+        currSpeed = isSlowed ? slowDownSpeed : MoveSpeed;
 
         if(InputHorizontal == -1)
         {
@@ -75,6 +73,4 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
     }
-
-
 }

@@ -1,32 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
     [Header("Bullet Variables")]
-    [SerializeField]
-    private GameObject bulletPrefab;
-    [SerializeField]
+    [SerializeField] private GameObject bulletPrefab;
     public GameObject firePoint;
     public GameObject firePoint1;
     public GameObject firePoint2;
 
+    [Header("Score Variables")]
     public TextMeshProUGUI scoreText;
-    public int score;
+    public int score = 0;
 
     private float timeBtwShots;
     public float startTime;
 
-    private void Start()
-    {
-        score = 0;
-    }
-
     public void Update()
     {
         scoreText.text = "Score: " + score.ToString();
+
         if (timeBtwShots <= 0)
         {
             if (Input.GetKey(KeyCode.UpArrow))

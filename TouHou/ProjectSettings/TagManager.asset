@@ -8,7 +8,7 @@ TagManager:
   - Check
   - Enemy
   - Bound
-  - Walll
+  - Wall
   layers:
   - Default
   - TransparentFX
